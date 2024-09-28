@@ -7,7 +7,7 @@ interface Props {
     id: number;
     details: IItems[];
     setdetails: React.SetStateAction<IItems[]>;
-    setPrice: (price: number) => void;
+    setPrice: () => void;
     price:number;
 
 }

@@ -4,7 +4,7 @@ import food from './assets/food.png'
 import drink from './assets/drink.png'
 import {IItems} from "./types";
 import Details from "./coponents/Order-Details/Details.tsx";
-import ItemsAdd from "./coponents/Items-add/items-add.tsx";
+import ItemsAdd from "./coponents/Btn-Add/items-add.tsx";
 
 
 const App = () => {
@@ -22,41 +22,7 @@ const App = () => {
     const [details,setdetails] = useState<IItems[]>([])
     const [price, setPrice] = useState(0);
 
-    const BtnAdd = (id: number) => {
-        const itemIndex = items.findIndex((item) => item.id === id);
-        if (itemIndex !== id) {
 
-            const item = [...items];
-
-            const div = details.find((detail) => detail.name === item[itemIndex].name);
-
-            if (div) {
-                const updatedDetails = details.map((detail) =>
-                    detail.name === div.name
-                        ? { ...detail, count: detail.count + 1 }
-                        : detail
-                );
-
-                setdetails(updatedDetails);
-
-
-            } else {
-
-                setdetails([
-                    ...details,
-                    {
-                        name: item[itemIndex].name,
-                        id: Date.now(),
-                        price: item[itemIndex].price,
-                        count: 1,
-                    }
-                ]);
-            }
-            setPrice(details.reduce((acc, item) => acc + (item.count * item.price), 0));
-            setitems(item);
-        }
-
-    };
 
 
 
@@ -71,7 +37,12 @@ const App = () => {
                         price={price}
                         setPrice={setPrice}
                     />
-                    <ItemsAdd items={items} BtnAdd={BtnAdd} />
+                    <ItemsAdd
+                        items={items}
+                        details={details}
+                        setdetails={setdetails}
+                        setPrice={setPrice}
+                        setitems={setitems}/>
                 </div>
                 <div className="footer"></div>
             </div>

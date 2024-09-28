@@ -4,6 +4,7 @@ import food from './assets/food.png'
 import drink from './assets/drink.png'
 import {IItems} from "./types";
 import Details from "./coponents/Order-Details/Details.tsx";
+import ItemsAdd from "./coponents/Items-add/items-add.tsx";
 
 const App = () => {
 
@@ -68,16 +69,7 @@ const App = () => {
                 <div className='header'></div>
                 <div className='main'>
                     <Details details={details} deleteOneItem={deleteOneItem} price={price} />
-                    <div className='Food-box'> {items.map(i => (
-
-                        <button key={i.name} onClick={() => BtnAdd(i.id)} type='button' className='btnFood'>
-                            <img src={i.src} alt="" style={{ width: '40px' }} />
-                            <div className='inner-text'><h3>{i.name}</h3> <h4>Price: {i.price} KGS</h4></div>
-                        </button>
-
-
-                    ))}</div>
-
+                 <ItemsAdd items={items} BtnAdd={BtnAdd}/>
                 </div>
                 <div className='footer'></div>
             </div>

@@ -4,7 +4,7 @@ import food from './assets/food.png'
 import drink from './assets/drink.png'
 import {IItems} from "./types";
 import Details from "./coponents/Order-Details/Details.tsx";
-import ItemsAdd from "./coponents/Btn-Add/items-add.tsx";
+import BtnAdd from "./coponents/Btn-Add/Btn-Add.tsx";
 
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
                         price={price}
                         setPrice={setPrice}
                     />
-                    <ItemsAdd
+                    <BtnAdd
                         items={items}
                         details={details}
                         setdetails={setdetails}

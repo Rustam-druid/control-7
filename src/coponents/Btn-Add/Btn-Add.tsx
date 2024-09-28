@@ -10,7 +10,7 @@ interface Props {
 
 }
 
-const ItemsAdd:React.FC<Props> = ({items,details,setdetails,setPrice,setitems}) => {
+const BtnAdd:React.FC<Props> = ({items,details,setdetails,setPrice,setitems}) => {
 
     const BtnAdd = (id: number) => {
         const itemIndex = items.findIndex((item) => item.id === id);
@@ -61,4 +61,4 @@ const ItemsAdd:React.FC<Props> = ({items,details,setdetails,setPrice,setitems}) 
     );
 };
 
-export default ItemsAdd;
+export default BtnAdd;

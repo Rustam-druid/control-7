@@ -1,24 +1,20 @@
 import React, {useState} from 'react';
 import './App.css'
-
-interface IItems {
-    name: string;
-    price: number;
-    src:string;
-    count: number;
-    id:number;
-}
+import food from './assets/food.png'
+import drink from './assets/drink.png'
+import {IItems} from "./types";
+import Details from "./coponents/Order-Details/Details.tsx";
 
 const App = () => {
 
 
     const [items,setitems] = useState<IItems[]>([
-        {name:'Hamburger',price: 80,src: '' , count:0, id:1},
-        {name:'Cheeseburger',price: 90,src: '' , count:0, id:2 },
-        {name:'Fries',price: 45,src: '', count:0, id:3  },
-        {name:'Coffee',price: 70,src: '', count:0, id:4  },
-        {name:'Tea',price: 50,src: ''  , count:0, id:5,},
-        {name:'Cola',price: 40,src: '' , count:0, id:6 },
+        {name:'Hamburger',price: 80,src: food , count:0, id:1},
+        {name:'Tea',price: 50,src: drink  , count:0, id:5,},
+        {name:'Fries',price: 45,src: food, count:0, id:3  },
+        {name:'Coffee',price: 70,src: drink, count:0, id:4  },
+        {name:'Cheeseburger',price: 90,src: food , count:0, id:2 },
+        {name:'Cola',price: 40,src: drink , count:0, id:6 },
     ])
 
     const [details,setdetails] = useState<IItems[]>([])
@@ -40,7 +36,7 @@ const App = () => {
                 );
 
                 setdetails(updatedDetails);
-                setPrice(updatedDetails.reduce((acc, item) => acc + (item.count * item.price), 0));
+
 
             } else {
 
@@ -60,41 +56,24 @@ const App = () => {
 
     };
 
-    function deleteOneItem(id: number) {
+    const deleteOneItem = (id: number) => {
         const updatedDetails = details.filter((detail) => detail.id !== id);
         setdetails(updatedDetails);
         setPrice(updatedDetails.reduce((acc, item) => acc + (item.count * item.price), 0));
-    }
+    };
 
     return (
         <>
             <div className='container'>
                 <div className='header'></div>
                 <div className='main'>
-                    <div className='details'>
-                        {details.length > 0 ? (
-                            details.map((i) => (
-                                    <div key={i.id} className="details-div">
-                                        <div>{i.name} </div>
-                                        <div>x{i.count} {i.price} KGS {i.count > 0 ? (
-                                            <button
-                                                type="button"
-                                                onClick={() => deleteOneItem(i.id)}
-                                                className="delete"
-                                            ></button>
-                                        ) : null}</div>
-                                    </div>
-                            ))
-                        ) : (
-                            <div>Order is empty <p>Please add some items</p></div>
-                        )}
-                        {details.length > 0 ? (<p>Total Price: {price}</p>) : null}
-
-                    </div>
+                    <Details details={details} deleteOneItem={deleteOneItem} price={price} />
                     <div className='Food-box'> {items.map(i => (
 
                         <button key={i.name} onClick={() => BtnAdd(i.id)} type='button' className='btnFood'>
-                            <h3>{i.name}</h3> <h4>Price: {i.price} KGS</h4></button>
+                            <img src={i.src} alt="" style={{ width: '40px' }} />
+                            <div className='inner-text'><h3>{i.name}</h3> <h4>Price: {i.price} KGS</h4></div>
+                        </button>
 
 
                     ))}</div>

@@ -6,6 +6,7 @@ import {IItems} from "./types";
 import Details from "./coponents/Order-Details/Details.tsx";
 import ItemsAdd from "./coponents/Items-add/items-add.tsx";
 
+
 const App = () => {
 
 
@@ -57,23 +58,23 @@ const App = () => {
 
     };
 
-    const deleteOneItem = (id: number) => {
-        const updatedDetails = details.filter((detail) => detail.id !== id);
-        setdetails(updatedDetails);
-        setPrice(updatedDetails.reduce((acc, item) => acc + (item.count * item.price), 0));
-    };
+
 
     return (
         <>
-            <div className='container'>
-                <div className='header'></div>
-                <div className='main'>
-                    <Details details={details} deleteOneItem={deleteOneItem} price={price} />
-                 <ItemsAdd items={items} BtnAdd={BtnAdd}/>
+            <div className="container">
+                <div className="header"></div>
+                <div className="main">
+                    <Details
+                        details={details}
+                        setdetails={setdetails}
+                        price={price}
+                        setPrice={setPrice}
+                    />
+                    <ItemsAdd items={items} BtnAdd={BtnAdd} />
                 </div>
-                <div className='footer'></div>
+                <div className="footer"></div>
             </div>
-
         </>
     );
 };

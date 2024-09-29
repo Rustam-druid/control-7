@@ -3,62 +3,39 @@ import {IItems} from "../../types";
 
 interface Props {
     items: IItems[];
-    details:IItems[];
-    setdetails: React.SetStateAction<IItems[]>;
-    setPrice: () => void;
-    setitems: React.SetStateAction<IItems[]>;
-
+    setPrice: (price:number) => void;
+    setitems:React.SetStateAction<IItems[]>
 }
 
-const BtnAdd:React.FC<Props> = ({items,details,setdetails,setPrice,setitems}) => {
+const BtnClick:React.FC<Props> = ({items, setPrice, setitems}) => {
 
-    const BtnAdd = (id: number) => {
-        const itemIndex = items.findIndex((item) => item.id === id);
-        if (itemIndex !== id) {
+    const Btn = (id:number) => {
+        const index = items.findIndex((item) => item.id === id);
 
-            const item = [...items];
+        if (index !== -1) {
+            const item =[...items];
+            item[index].count += 1;
 
-            const div = details.find((detail) => detail.name === item[itemIndex].name);
+            let total = item.reduce((acc, item) => acc + (item.count * item.price), 0);
 
-            if (div) {
-                const updatedDetails = details.map((detail) =>
-                    detail.name === div.name
-                        ? { ...detail, count: detail.count + 1 }
-                        : detail
-                );
-
-                setdetails(updatedDetails);
-
-            } else {
-
-                setdetails([
-                    ...details,
-                    {
-                        name: item[itemIndex].name,
-                        id: Date.now(),
-                        price: item[itemIndex].price,
-                        count: 1,
-                    }
-                ]);
-            }
-            setPrice(details.reduce((acc, item) => acc + (item.count * item.price), 0));
-            setitems(item);
+            setPrice(total);
+            setitems(item)
         }
 
     };
 
-    return (
-        <div className='Food-box'> {items.map(i => (
+return (
+    <div className='Food-box'> {items.map(i => (
+        <button key={i.id} onClick={() => Btn(i.id)} className='btnFood'>
+            <img src={i.src} alt={i.name} style={{width: '40px'}}/>
+            <div>
+                <h3 className='inner-Food-text'>  {i.name}</h3>
+                <h4 className='inner-Food-text'>Price {i.price} KGS</h4>
+            </div>
 
-            <button key={i.name} onClick={() => BtnAdd(i.id)} type='button' className='btnFood'>
-                <img src={i.src} alt="" style={{width: '40px'}}/>
-                <div className='inner-text'><h3>{i.name}</h3> <h4>Price: {i.price} KGS</h4></div>
-            </button>
-
-
-        ))}</div>
-
-    );
+        </button>
+    ))}</div>
+)
 };
 
-export default BtnAdd;
+export default BtnClick;

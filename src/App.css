@@ -27,16 +27,14 @@
 }
 .details-div{
     display: grid;
-    align-items: center;
     grid-template-columns: repeat(2, 1fr);
-    margin-bottom: 10px;
-}
-.div-delete{
-    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 }
+.details-div p {
+    margin: 0 0 0 auto;
+}
+
 .delete {
     width: 20px;
     height: 20px;
@@ -63,11 +61,8 @@ width: 100%;
     background:transparent;
     border-radius: 20px;
 }
-.btnFood h3 , h4 {
-    margin: 0 0 6px 0;
+.inner-Food-text{
     text-align: left;
+    margin:0 0 5px 0;
 }
-inner-text{
-    display: flex;
-    justify-content: center;
-}
+
